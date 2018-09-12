@@ -1,0 +1,14 @@
+body { background-color: darkseagreen;}
+
+.sideDiv { background-color: darkgreen;
+            width: 400px;
+            height: 900px;}
+
+#friendDiv {background-color: saddlebrown;
+        float: bottom;}
+
+#eventDiv {float: left;}
+#treeDiv {float: inside;}
+#settingsDiv {float: left; }
+
+div { border: black 1px dotted;}
