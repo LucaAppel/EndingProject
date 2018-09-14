@@ -1,7 +1,8 @@
 package pl.sdacademy.endingProject.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -14,15 +15,123 @@ public class Universum {
     private User owner;
 
     @OneToMany
-    private List<UserStatus> userStatusList;
+    private Set<UserStatus> userStatusSet;
 
     @OneToMany
-    private List<Person> personList;
+    private Set<Person> personSet = new HashSet<>();
     @OneToMany
-    private List<Place> placeList;
+    private Set<Place> placeSet = new HashSet<>();
     @OneToMany
-    private List<Event> eventList;
+    private Set<Event> eventSet = new HashSet<>();
 
     private Boolean isPrivate;
 
+    public Universum() {
+    }
+
+    public Universum(User owner, Set<UserStatus> userStatusSet, Set<Person> personSet, Set<Place> placeSet, Set<Event> eventSet, Boolean isPrivate) {
+        this.owner = owner;
+        this.userStatusSet = userStatusSet;
+        this.personSet = personSet;
+        this.placeSet = placeSet;
+        this.eventSet = eventSet;
+        this.isPrivate = isPrivate;
+    }
+
+    public Universum(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public Set<UserStatus> getUserStatusSet() {
+        return userStatusSet;
+    }
+
+    public void setUserStatusSet(Set<UserStatus> userStatusSet) {
+        this.userStatusSet = userStatusSet;
+    }
+
+    public void addUserStatus(UserStatus userStatus){
+        this.userStatusSet.add(userStatus);
+    }
+
+    public Set<Person> getPersonSet() {
+        return personSet;
+    }
+
+    public void setPersonSet(Set<Person> personSet) {
+        this.personSet = personSet;
+    }
+
+    public void addPerson(Person person){
+        this.personSet.add(person);
+    }
+
+    public Set<Place> getPlaceSet() {
+        return placeSet;
+    }
+
+    public void setPlaceSet(Set<Place> placeSet) {
+        this.placeSet = placeSet;
+    }
+
+    public void addPlace(Place place){
+        this.placeSet.add(place);
+    }
+
+    public Set<Event> getEventSet() {
+        return eventSet;
+    }
+
+    public void setEventSet(Set<Event> eventSet) {
+        this.eventSet = eventSet;
+    }
+
+    public void addEvent(Event event){
+        this.eventSet.add(event);
+    }
+
+    public Boolean getPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Universum universum = (Universum) o;
+
+        if (id != universum.id) return false;
+        if (owner != null ? !owner.equals(universum.owner) : universum.owner != null) return false;
+        if (userStatusSet != null ? !userStatusSet.equals(universum.userStatusSet) : universum.userStatusSet != null)
+            return false;
+        if (personSet != null ? !personSet.equals(universum.personSet) : universum.personSet != null) return false;
+        if (placeSet != null ? !placeSet.equals(universum.placeSet) : universum.placeSet != null) return false;
+        if (eventSet != null ? !eventSet.equals(universum.eventSet) : universum.eventSet != null) return false;
+        return isPrivate != null ? isPrivate.equals(universum.isPrivate) : universum.isPrivate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (userStatusSet != null ? userStatusSet.hashCode() : 0);
+        result = 31 * result + (personSet != null ? personSet.hashCode() : 0);
+        result = 31 * result + (placeSet != null ? placeSet.hashCode() : 0);
+        result = 31 * result + (eventSet != null ? eventSet.hashCode() : 0);
+        result = 31 * result + (isPrivate != null ? isPrivate.hashCode() : 0);
+        return result;
+    }
 }
