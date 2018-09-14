@@ -1,18 +1,18 @@
-package pl.sdacademy.EndingProject.model;
+package pl.sdacademy.endingProject.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
-public class User {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nickname;
-    private String email;
-    private String password;
-    private List<Person> friends;
+    private String text;
+    private boolean isRead;
+    private boolean isPerson1sender;
+    private LocalDateTime sentTime;
 }

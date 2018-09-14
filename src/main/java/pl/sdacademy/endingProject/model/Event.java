@@ -1,11 +1,7 @@
-package pl.sdacademy.EndingProject.model;
+package pl.sdacademy.endingProject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -18,8 +14,12 @@ public class Event {
     private LocalTime startTime;
     private LocalDate endDate;
     private LocalTime endTime;
+    @ManyToMany
     private List<Person> attendees;
     private String headline;
     private String descryption;
-    private Place place;
+    @ManyToMany(mappedBy = "events")
+    private List<Place> places;
+    @ManyToOne
+    private Universum universum;
 }

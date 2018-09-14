@@ -1,4 +1,4 @@
-package pl.sdacademy.EndingProject.model;
+package pl.sdacademy.endingProject.model;
 
 public enum RelationEnum {
     MARRIAGE,

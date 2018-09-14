@@ -1,9 +1,7 @@
-package pl.sdacademy.EndingProject.model;
+package pl.sdacademy.endingProject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Place {
@@ -16,5 +14,9 @@ public class Place {
     private String street;
     private String placeNumber;
     private String shortDescription;
+    @ManyToMany
+    private List<Event> events;
+    @ManyToOne
+    private Universum universum;
 
 }
