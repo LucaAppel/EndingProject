@@ -1,5 +1,7 @@
 package pl.sdacademy.endingProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -96,6 +98,7 @@ public class Place {
         this.events.add(event);
     }
 
+    @JsonIgnore
     public Universum getUniversum() {
         return universum;
     }

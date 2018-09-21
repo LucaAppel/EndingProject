@@ -10,21 +10,22 @@ public class Universum {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String name;
 
     @ManyToOne
     private User owner;
 
-    @OneToMany
-    private Set<UserStatus> userStatusSet;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<UserStatus> userStatusSet = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "universum")
     private Set<Person> personSet = new HashSet<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "universum")
     private Set<Place> placeSet = new HashSet<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "universum")
     private Set<Event> eventSet = new HashSet<>();
 
-    private Boolean isPrivate;
+    private Boolean isPrivate = true;
 
     public Universum() {
     }
@@ -38,12 +39,27 @@ public class Universum {
         this.isPrivate = isPrivate;
     }
 
-    public Universum(Boolean isPrivate) {
+    public Universum(String Name, Boolean isPrivate) {
+        this.name = name;
+        this.isPrivate = isPrivate;
+    }
+
+    public Universum(String name, User owner, Boolean isPrivate) {
+        this.name = name;
+        this.owner = owner;
         this.isPrivate = isPrivate;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getOwner() {
@@ -59,6 +75,7 @@ public class Universum {
     }
 
     public void addUserStatus(UserStatus userStatus){
+        userStatus.setUniversum(this);
         this.userStatusSet.add(userStatus);
     }
 

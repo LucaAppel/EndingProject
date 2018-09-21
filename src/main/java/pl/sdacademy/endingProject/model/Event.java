@@ -1,5 +1,7 @@
 package pl.sdacademy.endingProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,11 +18,11 @@ public class Event {
     private LocalTime startTime;
     private LocalDate endDate;
     private LocalTime endTime;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Set<Person> attendees = new HashSet<>();
     private String headline;
     private String descryption;
-    @ManyToMany(mappedBy = "events")
+    @ManyToMany(mappedBy = "events",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Set<Place> places = new HashSet<>();
     @ManyToOne
     private Universum universum;
@@ -122,6 +124,7 @@ public class Event {
         this.places.add(place);
     }
 
+    @JsonIgnore
     public Universum getUniversum() {
         return universum;
     }

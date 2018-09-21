@@ -1,5 +1,7 @@
 package pl.sdacademy.endingProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -136,6 +138,7 @@ public class Person {
         this.relations.add(relation);
     }
 
+    @JsonIgnore
     public Universum getUniversum() {
         return universum;
     }
